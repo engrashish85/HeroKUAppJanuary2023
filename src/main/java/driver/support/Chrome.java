@@ -1,6 +1,7 @@
 package driver.support;
 
 import files.util.Globals;
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -21,25 +22,30 @@ public class Chrome implements DriverSetup {
         WebDriver chrome = null;
         HashMap<String, Object> chromePreferences = new HashMap<>();
         chromePreferences.put("profile.password_manager_enabled", false);
-        String fileLocationInMachine = Globals.DOWNLOAD_LOCATION.toString();
-        fileLocationInMachine = fileLocationInMachine.replace("/","\\");
-        chromePreferences.put("download.default_directory", fileLocationInMachine);
-//        enableLoggingPref (capabilities);
+//        String fileLocationInMachine = Globals.DOWNLOAD_LOCATION.toString();
+//        fileLocationInMachine = fileLocationInMachine.replace("/","\\");
+//        chromePreferences.put("download.default_directory", fileLocationInMachine);
+////        enableLoggingPref (capabilities);
         ChromeOptions options = new ChromeOptions();
         options = options.merge (capabilities);
-        options.addArguments ("--no-default-browser-check");
-        options.addArguments ("--disable-extensions");
-        options.addArguments ("test-type");
-        options.setExperimentalOption("useAutomationExtension", false);
+//        options.addArguments ("--no-default-browser-check");
+//        options.addArguments ("--disable-extensions");
+//        options.addArguments ("test-type");
+        options.addArguments("--no-sandbox");
+        options.addArguments("--disable-dev-shm-usage");
+//        options.setExperimentalOption("useAutomationExtension", false);
         options.setExperimentalOption("prefs", chromePreferences);
+        options.addArguments("--start-maximized");
 //        if (! (otherProperties.getRemoteDriver () != null && other properties.getRemoteBriver().equalsignoreCase( another String: "YES"))) {
             logger.info("Machine Type: Local windows");
-            WebDriver driver = new ChromeDriver(options);
-            driver.get("");
+        WebDriverManager.chromedriver().setup();
+        chrome = new ChromeDriver(options);
+
+
 //            System.setProperty("webdriver.chrome.driver", Globals.CHROME_DRIVER_EXE.toString());
 //                    chrome = new ChromeDriver(options);
 //        } else {
-            try {
+//            try {
 //                enablePerformanceLogging (options);
 //                options.addArguments ("chrome.switches", "--disable-extensions");
 //                options.addArguments ("--disable-notifications");
@@ -48,17 +54,18 @@ public class Chrome implements DriverSetup {
 //                options.addArguments (-ignore-certificate-errors");
 //            }
 //        }
-        options.addArguments ("-ignore-certificate-errors");
-        options.addArguments ("--allow-insecure-localhost");
-        options.addArguments ("--no-sandbox");
+//        options.addArguments ("-ignore-certificate-errors");
+//        options.addArguments ("--allow-insecure-localhost");
+//        options.addArguments ("--no-sandbox");
         /*Does not work on selenium grids for ralf
         options.addArguments ("--headless=true");*/
-        options.addArguments("--start-maximized");
-        logger.info("http://" + Globals.HOST_IP.toString() + ":" +Globals.HOST_PORT.toString() + "/wd/hub");
-        chrome = new RemoteWebDriver(new URL("http://" + Globals.HOST_IP.toString() + "/wd/hub"), options);
-    } catch (MalformedURLException e) {
-                logger.info(e.getCause() + e.getMessage());
-            }
+//        options.addArguments("--start-maximized");
+
+//        logger.info("http://" + Globals.HOST_IP.toString() + ":" +Globals.HOST_PORT.toString() + "/wd/hub");
+//        chrome = new RemoteWebDriver(new URL("http://" + Globals.HOST_IP.toString() + "/wd/hub"), options);
+//    } catch (MalformedURLException e) {
+        //        logger.info(e.getCause() + e.getMessage());
+          //  }
             return chrome;
     }
 

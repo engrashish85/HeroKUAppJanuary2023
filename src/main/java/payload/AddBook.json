@@ -1,0 +1,11 @@
+{
+  "name":"Learn Appium Automation with Java",
+  "isbn":"bczd",
+  "aisle":"227",
+  "author":"John foe",
+  "name1": {
+    "author": {
+      "isbn": "224"
+    }
+  }
+}

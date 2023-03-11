@@ -97,6 +97,12 @@ public enum Globals {
         @Override
         public String toString() { return Globals.PROJECT_PATH.toString().substring(0, Globals.PROJECT_PATH.toString().
                 lastIndexOf(File.separator)) + "/commons/src/main/resources/Data/"; }
+    },
+
+    REPORT_CONFIG_PATH() {
+        @Override
+        public String toString() { return Globals.CONFIG_LOCATION.toString().substring(0, Globals.CONFIG_LOCATION.toString().
+                    lastIndexOf(File.separator)) + "/extent-config.xml"; }
     }
 
 }

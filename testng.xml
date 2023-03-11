@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="All Test Suite">
+    <test verbose="2" preserve-order="true" name="sample test">
+        <groups>
+            <run>
+                <include name="java-stream"/>
+            </run>
+        </groups>
+        <classes>
+            <class name = "sorting.JavaStream" />
+        </classes>
+    </test>
+    <test name = "Sample test 2">
+        <groups>
+            <run>
+                <include name="factorial"/>
+            </run>
+        </groups>
+        <classes>
+            <class name = "sorting.Factorial"/>
+        </classes>
+    </test>
+</suite>

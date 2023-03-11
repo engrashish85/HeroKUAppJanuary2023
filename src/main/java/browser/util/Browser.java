@@ -6,6 +6,8 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
 
 public class Browser {
     public static Browser browser = null;
@@ -52,10 +54,17 @@ public class Browser {
 
     public static void invokeBrowser() {
         ChromeOptions chromeOptions = new ChromeOptions();
+        chromeOptions.addArguments("--remote-allow-origins=*");
         WebDriverManager.chromedriver().setup();
-        WebDriver driver = new ChromeDriver(chromeOptions);
-        driver.get("https://the-internet.herokuapp.com/");
-        driver.quit();
+        webDriver = new ChromeDriver(chromeOptions);
+        webDriver.get("https://the-internet.herokuapp.com/");
     }
+
+    @AfterClass
+    public void tearDown() {
+        webDriver.close();
+        webDriver.quit();
+    }
+
 
 }
