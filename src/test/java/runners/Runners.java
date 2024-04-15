@@ -9,7 +9,8 @@ import io.cucumber.testng.CucumberOptions;
         plugin={"pretty","html:target/cucumber-reports.html", "" +
                 "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"},
         publish = true,
-        tags = "@getBook or @login"
+//        tags = "@addBook or @getBook or @login"
+        tags = "@basicAuthCDT"
 
 )
 public class Runners extends AbstractTestNGCucumberTests {

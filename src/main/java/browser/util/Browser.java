@@ -4,17 +4,19 @@ import driver.support.DriverController;
 import driver.support.OtherProperties;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.edge.EdgeOptions;
 import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterMethod;
 
 public class Browser {
     public static Browser browser = null;
     private static WebDriver webDriver = null;
 
     private Browser() {
-        webDriver = DriverController.selectWebDriver(new OtherProperties().getBrowser());
+        if (webDriver==null) {
+            webDriver = DriverController.selectWebDriver(new OtherProperties().getBrowser());
+        }
     }
 
     private Browser(String browserName) {
@@ -52,12 +54,15 @@ public class Browser {
         browser = value;
     }
 
-    public static void invokeBrowser() {
+    public static void invokeBrowser(String url) {
+        EdgeOptions edgeOptions = new EdgeOptions();
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.addArguments("--remote-allow-origins=*");
-        WebDriverManager.chromedriver().setup();
-        webDriver = new ChromeDriver(chromeOptions);
-        webDriver.get("https://the-internet.herokuapp.com/");
+        edgeOptions.addArguments("--remote-allow-origins=*");
+        WebDriverManager.edgedriver().setup();
+//        webDriver = new EdgeDriver();
+        webDriver = new EdgeDriver(edgeOptions);
+        webDriver.get(url);
     }
 
     @AfterClass

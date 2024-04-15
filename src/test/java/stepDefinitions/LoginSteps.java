@@ -51,7 +51,7 @@ public class LoginSteps {
 
     @Given("I invoke chrome browser using webDriverManager")
     public void iInvokeChromeBrowserUsingWebDriverManager() {
-        Browser.invokeBrowser();
+        Browser.invokeBrowser("https://the-internet.herokuapp.com/");
     }
 
     @After
